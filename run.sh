@@ -1,0 +1,15 @@
+FILE="$1"
+
+if [ ! -f "$FILE" ]; then
+  >&2 echo "Error: File '$FILE' doesn't exist."
+  exit 1
+fi
+
+exec docker run \
+  -it \
+  --rm \
+  --name php-script \
+  -v "$PWD":/usr/src/php-script \
+  -w /usr/src/php-script \
+  php:7.4-cli \
+  php "$FILE"
