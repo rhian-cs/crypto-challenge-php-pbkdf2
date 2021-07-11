@@ -1,16 +1,28 @@
 <?php
-include('create_key_from_password.php');
-include('aes_functions.php');
+include("utils/includes.php");
+
+$file = "encrypted_secret.txt";
+$file_contents = hex2bin(file_get_contents($file));
+
+$iv = substr($file_contents, 0, IV_SIZE/8);
+$salt = substr($file_contents, IV_SIZE/8, SALT_SIZE/8);
+$encrypted_data = substr($file_contents, (IV_SIZE + SALT_SIZE)/8);
 
 echo "Digite a senha que usou para proteger o seu segredo.\n";
 $password = readline("> ");
 
-$key_iv_pair = create_key_from_password($password);
-$encrypted_data = encrypt($secret_data, $key_iv_pair);
-$file = "encrypted_secret.txt";
+$key_data = generate_key_from_password($password, $iv, $salt);
 
-file_put_contents($file, bin2hex($encrypted_data));
+if(VERBOSE_OUTPUT) {
+  echo "key: ".bin2hex($key_data->key)."\n";
+  echo "iv: ".bin2hex($key_data->iv)."\n";
+  echo "salt: ".bin2hex($key_data->salt)."\n";
+  echo "encrypted_data: ".bin2hex($encrypted_data)."\n";
+}
 
-echo "Seus segredos foram guardados no arquivo '$file'.\n";
+$secret_data = decrypt($encrypted_data, $key_data);
+
+echo "Seu segredo original era:\n";
+echo $secret_data."\n";
 
 ?>
