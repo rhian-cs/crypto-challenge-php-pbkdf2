@@ -5,5 +5,5 @@
   define("IV_SIZE", 128);
   define("SALT_SIZE", 128);
   define("PBKDF2_HASH_ALGORITHM", "sha256");
-  define("PBKDF2_ITERATIONS", 1000);
+  define("PBKDF2_ITERATIONS", 50000);
 ?>
