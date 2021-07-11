@@ -1,9 +1,7 @@
 <?php
-
-class KeyData {
+  class KeyData {
     public $key;
     public $iv;
     public $salt;
-}
-
+  }
 ?>
