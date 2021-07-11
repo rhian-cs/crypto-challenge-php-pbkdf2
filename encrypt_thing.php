@@ -1,10 +1,10 @@
 <?php
   include("utils/includes.php");
 
-  echo "Digite um segredo que deseja armazenar. Ele será armazenado em um arquivo.\n";
+  echo "Type a secret you wish to store. It will be encrypted and stored in a file.\n";
   $secret_data = readline("> ");
 
-  echo "Digite uma senha para proteger o seu segredo.\n";
+  echo "Create a password to protect this file.\n";
   $password = readline("> ");
 
   $key_data = generate_key_from_password($password);
@@ -20,5 +20,5 @@
   $file_contents = $key_data->iv . $key_data->salt . $encrypted_data;
   file_put_contents(OUTPUT_FILENAME, bin2hex($file_contents));
 
-  echo "Seus segredos foram guardados no arquivo '".OUTPUT_FILENAME."'.\n";
+  echo "Your secret has been encrypted and stored in the '".OUTPUT_FILENAME."' file.\n";
 ?>

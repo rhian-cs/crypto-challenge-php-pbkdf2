@@ -7,7 +7,7 @@
   $salt = substr($file_contents, IV_SIZE/8, SALT_SIZE/8);
   $encrypted_data = substr($file_contents, (IV_SIZE + SALT_SIZE)/8);
 
-  echo "Digite a senha que usou para proteger o seu segredo.\n";
+  echo "Type in the password you've used to encrypt the '".OUTPUT_FILENAME."' file.\n";
   $password = readline("> ");
 
   $key_data = generate_key_from_password($password, $iv, $salt);
@@ -21,6 +21,6 @@
 
   $secret_data = decrypt($encrypted_data, $key_data);
 
-  echo "Seu segredo original era:\n";
+  echo "Your original secret was:\n";
   echo $secret_data."\n";
 ?>
