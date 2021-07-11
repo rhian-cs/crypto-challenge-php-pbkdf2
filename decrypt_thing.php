@@ -1,8 +1,7 @@
 <?php
 include("utils/includes.php");
 
-$file = "encrypted_secret.txt";
-$file_contents = hex2bin(file_get_contents($file));
+$file_contents = hex2bin(file_get_contents(OUTPUT_FILENAME));
 
 $iv = substr($file_contents, 0, IV_SIZE/8);
 $salt = substr($file_contents, IV_SIZE/8, SALT_SIZE/8);

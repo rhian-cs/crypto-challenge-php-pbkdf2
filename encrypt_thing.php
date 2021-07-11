@@ -17,11 +17,9 @@ if(VERBOSE_OUTPUT) {
   echo "encrypted_data: ".bin2hex($encrypted_data)."\n";
 }
 
-$file = "encrypted_secret.txt";
-
 $file_contents = $key_data->iv . $key_data->salt . $encrypted_data;
-file_put_contents($file, bin2hex($file_contents));
+file_put_contents(OUTPUT_FILENAME, bin2hex($file_contents));
 
-echo "Seus segredos foram guardados no arquivo '$file'.\n";
+echo "Seus segredos foram guardados no arquivo '".OUTPUT_FILENAME."'.\n";
 
 ?>
